@@ -27,5 +27,6 @@ public class DemoPrimitive {
 
     // Boolean
     boolean isAlive = true;
+    System.out.println(isAlive);
   }
 }
