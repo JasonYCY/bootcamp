@@ -44,5 +44,14 @@ public class DemoOperator {
     } else {
       System.out.println("is an elderly");
     }
+
+    // true && false
+    int e = 5;
+    System.out.println(e > 3 && e < 10);
+    System.out.println(e > 3 || e > 20);
+    System.out.println(false || true);
+    System.out.println(true && false);
+    System.out.println(true && false || true);
+    System.out.println(false || true && true);
   }
 }
