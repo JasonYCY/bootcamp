@@ -21,8 +21,9 @@ public class DemoIf {
     }
     printSeparationLine();
 
-    // exercise 1 (if x > 3 and even -> balance + 10, else balance + 5)
+    // exercise 1
     System.out.println("-= Exercise 1 =-");
+    // if x > 3 and even -> balance + 10, else balance + 5
     int balance = 0;
     System.out.println("initial balance: " + balance);
 
@@ -89,6 +90,67 @@ public class DemoIf {
     System.out.println("New premiumPrice: $" + premiumPrice);
     System.out
         .println("New additionalPercentage: " + additionalPercentage + "%");
+    printSeparationLine();
+
+    // exercise 3
+    System.out.println("-= Exercise 3 =-");
+    // if u % 3 == 0, money + 3
+    // if u % 4 == 0, money + 4
+    // if u % 5 == 0, money + 5
+    int u = 135;
+    int money = 100;
+    System.out.println("u: " + 135);
+    System.out.println("money: " + money);
+
+    if (u % 3 == 0) {
+      System.out.println("[Divisible by 3]");
+      money += 3;
+    }
+
+    if (u % 4 == 0) {
+      System.out.println("[Divisible by 4]");
+      money += 4;
+    }
+
+    if (u % 5 == 0) {
+      System.out.println("[Divisible by 5]");
+      money += 5;
+    }
+
+    System.out.println("New money: " + money);
+    printSeparationLine();
+
+    // exercise 4
+    System.out.println("-= Exercise 4 =-");
+
+    /*
+     * >= 90, Grade A
+     * 
+     * >= 80, Grade B
+     * 
+     * >= 70, Grade C
+     * 
+     * otherwise, Grade F
+     */
+    int score = 75;
+    char grade = ' ';
+    System.out.println("Score: " + score);
+
+    if (score >= 90) {
+      System.out.println("[score >= 90, grade = A]");
+      grade = 'A';
+    } else if (score >= 80) {
+      System.out.println("[score >= 80, grade = B]");
+      grade = 'B';
+    } else if (score >= 70) {
+      System.out.println("[score >= 70, grade = C]");
+      grade = 'C';
+    } else {
+      System.out.println("[score < 70, grade = F]");
+      grade = 'F';
+    }
+
+    System.out.println("Grade: " + grade);
     printSeparationLine();
   }
 }
