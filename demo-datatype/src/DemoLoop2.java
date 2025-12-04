@@ -108,6 +108,9 @@ public class DemoLoop2 {
     // || currentChar == '!') {
     // hasSpecialCharacter = true;
     // }
+    // if (hasCapital == true && hasSpecialCharacter == true) {
+    // break;
+    // }
     // }
 
     // if (passwordLength < 12 || hasCapital == false
