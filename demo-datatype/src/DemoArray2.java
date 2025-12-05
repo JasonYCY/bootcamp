@@ -44,13 +44,27 @@ public class DemoArray2 {
     // System.out.println("Lowest score: " + lowestScore);
 
     // 3) Move the max value to the tail
+    // int[] scores = new int[] {23, 100, 8, 97, 56};
+    // System.out.println("Before: " + Arrays.toString(scores));
+    // for (int i = 0; i < scores.length - 1; i++) {
+    // if (scores[i] > scores[i + 1]) {
+    // int temp = scores[i + 1];
+    // scores[i + 1] = scores[i];
+    // scores[i] = temp;
+    // }
+    // }
+    // System.out.println("After: " + Arrays.toString(scores));
+
+    // 4) Bubble sort
     int[] scores = new int[] {23, 100, 8, 97, 56};
     System.out.println("Before: " + Arrays.toString(scores));
     for (int i = 0; i < scores.length - 1; i++) {
-      if (scores[i] > scores[i + 1]) {
-        int temp = scores[i + 1];
-        scores[i + 1] = scores[i];
-        scores[i] = temp;
+      for (int j = 0; j < scores.length - 1 - i; j++) {
+        if (scores[j] > scores[j + 1]) {
+          int temp = scores[j + 1];
+          scores[j + 1] = scores[j];
+          scores[j] = temp;
+        }
       }
     }
     System.out.println("After: " + Arrays.toString(scores));
