@@ -11,5 +11,6 @@ public class DemoScanner {
     } else {
       System.out.println("This is an odd number!");
     }
+    scanner.close();
   }
 }
