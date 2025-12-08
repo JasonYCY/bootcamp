@@ -3,14 +3,14 @@ import java.util.Scanner;
 
 public class DemoBingo {
   public static void main(String[] args) {
-    // 1 to 100 (random number)
-    // one user
-    // 1) compare user input (from scanner) to the random number
-    // 2) if same -> end game
-    // 3) if not same -> update the range for selection
-    //      for example:
-    //            round 1: user picks 69 -> new range: 70 to 100
-    //            round 2: user picks 90 -> new range: 70 to 89
+    /**
+     * A two-player number guessing game (Bingo Game).
+     * Players A and B take turns guessing a secret number between 1 and 100.
+     * After each guess, the range is narrowed based on feedback until someone guesses correctly.
+     * 
+     * If a player inputs a number outside the current valid range,
+     * they must input again (without switching to the other player).
+     */
     Scanner scanner = new Scanner(System.in);
     int bingoNumber = new Random().nextInt(100) + 1;
     int lowerBound = 1;
