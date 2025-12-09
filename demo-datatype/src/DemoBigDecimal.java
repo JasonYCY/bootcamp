@@ -31,5 +31,17 @@ public class DemoBigDecimal {
 
     System.out.println(BigDecimal.valueOf(0.5).multiply(BigDecimal.valueOf(0.5))
         .setScale(1, RoundingMode.HALF_DOWN)); // 0.2 (0.5 * 0.5 = 0.25 -> 0.2)
+
+    // chain method: 0.2 * 0.1 - 0.4 + 3.5
+    System.out.println("chain method: 0.2 * 0.1 - 0.4 + 3.5 = " + (0.2 * 0.1 - 0.4 + 3.5));
+    System.out.println(BigDecimal.valueOf(0.2)
+        .multiply(BigDecimal.valueOf(0.1))
+        .subtract(BigDecimal.valueOf(0.4))
+        .add(BigDecimal.valueOf(3.5)));
+
+    // divide by zero & non-terminating decimal places
+    System.out.println(BigDecimal.valueOf(9).divide(BigDecimal.valueOf(3)));
+    System.out.println(BigDecimal.valueOf(10).divide(BigDecimal.valueOf(3), 5, RoundingMode.HALF_UP));
+
   }
 }
