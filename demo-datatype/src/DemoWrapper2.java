@@ -32,5 +32,24 @@ public class DemoWrapper2 {
     // Integer i6 = new Integer(127); // allocates new memory
     // System.out.println(i5.equals(i6)); // true (checks the value)
     // System.out.println(i5 == i6); // false (checks the address)
+
+    // String Pool
+    // String s4 = "abc"; // String Pool ("abc" not exists, adds to String Pool)
+    // String s5 = "abc"; // String Pool ("abc" exists, returns its address)
+    // System.out.println(s4.equals(s5)); // true
+    // System.out.println(s4 == s5); // true
+
+    // String is immutable
+    // so methods like replace() create a new String instead of changing the original String
+    // s4.replace("a", "z");
+    // System.out.println(s4); // abc
+
+    // String s6 = new String("abc"); // allocates new heap memory
+    // System.out.println(s4 == s6); // false
+
+    // String s7 = String.valueOf("abc"); // String Pool ("abc" exists, returns its address)
+    // System.out.println(s4 == s7); // true
+
+    
   }
 }
