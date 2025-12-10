@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Person {
   // attribute
   private double height;
@@ -28,10 +31,14 @@ public class Person {
     this.weight = weight;
   }
 
+  public double getBMI() {
+    return BigDecimal.valueOf(weight).divide(BigDecimal.valueOf(height).multiply(BigDecimal.valueOf(height)), 5, RoundingMode.HALF_UP).doubleValue();
+  }
+
   // main method
   public static void main(String[] args) {
     Person p1 = new Person();
-    p1.setHeight(173);
+    p1.setHeight(1.73);
     p1.setWeight(79);
 
     Person[] persons = new Person[2];
@@ -42,5 +49,7 @@ public class Person {
       System.out.println(person.getHeight());
       System.out.println(person.getWeight());
     }
+
+    System.out.println("BMI: " + p1.getBMI());
   }
 }
