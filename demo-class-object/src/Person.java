@@ -15,6 +15,28 @@ public class Person {
   }
   
   // method
+  public double getBMI() {
+    return BigDecimal.valueOf(weight).divide(BigDecimal.valueOf(height).multiply(BigDecimal.valueOf(height)), 1, RoundingMode.HALF_UP).doubleValue();
+  }
+
+  public String getBMIString() {
+    double BMI = getBMI();
+    if (BMI < 18.5) {
+      return "Under weight";
+    } else if (BMI < 25) {
+      return "Normal weight";
+    } else if (BMI < 30) {
+      return "Over weight";
+    } else if (BMI < 35) {
+      return "Obese Type I";
+    } else if (BMI < 40) {
+      return "Obese Type II";
+    } else {
+      return "Obese Type III";
+    }
+  }
+
+  // getter and setter
   public double getHeight() {
     return height;
   }
@@ -29,10 +51,6 @@ public class Person {
 
   public void setWeight(double weight) {
     this.weight = weight;
-  }
-
-  public double getBMI() {
-    return BigDecimal.valueOf(weight).divide(BigDecimal.valueOf(height).multiply(BigDecimal.valueOf(height)), 5, RoundingMode.HALF_UP).doubleValue();
   }
 
   // main method
@@ -51,5 +69,6 @@ public class Person {
     }
 
     System.out.println("BMI: " + p1.getBMI());
+    System.out.println(p1.getBMIString());
   }
 }
