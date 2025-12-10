@@ -7,6 +7,10 @@ public class Cat {
   public Cat() {}
 
   // non-static methods (belongs to object)
+  public boolean isAdult() {
+    return age > 6;
+  }
+
   public String getName() {
     return name;
   }
@@ -37,5 +41,14 @@ public class Cat {
     cat3.setName("Peter");
     System.out.println("Cat 3's name: " + cat3.name); // Peter
     System.out.println("Cat 1's name: " + cat1.name); // Peter
+
+    cat1.setAge(7);
+    cat2.setAge(6);
+    System.out.println("Cat 1 is adult: " + cat1.isAdult());
+    System.out.println("Cat 2 is adult: " + cat2.isAdult());
+
+
+
+
   }
 }
