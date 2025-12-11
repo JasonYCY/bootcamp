@@ -1,11 +1,9 @@
 import java.math.BigDecimal;
-// import java.time.LocalDateTime;
 
 public class Order {
   // attribute
   private static int nextID = 0;
   private int orderID = nextID++;
-  // private LocalDateTime orderDateTime = LocalDateTime.now();
   private Item[] items;
 
   // constructor
@@ -25,6 +23,15 @@ public class Order {
   }
 
   // method
+  public void add(Item newItem) {
+    Item[] newItems = new Item[items.length + 1];
+    for (int i = 0; i < items.length; i++) {
+      newItems[i] = this.items[i];
+    }
+    newItems[newItems.length - 1] = newItem;
+    items = newItems;
+  }
+
   public double amount() {
     BigDecimal totalAmount = BigDecimal.valueOf(0);
     for (Item item : items) {
