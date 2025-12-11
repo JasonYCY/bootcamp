@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+
 public class Customer {
   // attribute
   String name;
@@ -15,6 +17,19 @@ public class Customer {
   }
 
   // method
+  public boolean isVip() {
+    return getTotalOrderAmount() >= 100_000;
+  }
+
+  public double getTotalOrderAmount() {
+    BigDecimal totalAmount = BigDecimal.ZERO;
+    for (Order order : orders) {
+      totalAmount = totalAmount.add(BigDecimal.valueOf(order.amount()));
+    }
+
+    return totalAmount.doubleValue();
+  }
+
   public double getOrderAmount(int targetOrderID) {
     return getOrder(targetOrderID).amount();
   }
@@ -93,7 +108,15 @@ public class Customer {
     // Order.amount()
     // Customer.getOrderAmount(int orderID)
     double orderTotalAmount = john.getOrderAmount(targetOrderID);
-    System.out.println("The total amount for order with index " + targetOrderID + " is: " + orderTotalAmount);
+    System.out.println("The total amount for order with index " + targetOrderID + " is: " + orderTotalAmount + "\n");
+
+    System.out.println("Customer's total order amount: " + john.getTotalOrderAmount());
+    System.out.println("Is VIP: " + john.isVip() + "\n");
+
+    john.add(new Order(new Item(100_000, 1)));
+    System.out.println("Customer spent 100,000 more dollars!");
+    System.out.println("Customer's total order amount: " + john.getTotalOrderAmount());
+    System.out.println("Is VIP: " + john.isVip() + "\n");
 
 
 
