@@ -3,12 +3,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Order {
   // attribute
-  static int nextID = 0;
-  int orderID = nextID++;
-  LocalDateTime orderDateTime = LocalDateTime.now();
-  String productName;
-  String boughtBy;
-  double price;
+  private static int nextID = 0;
+  private int orderID = nextID++;
+  private LocalDateTime orderDateTime = LocalDateTime.now();
+  private String productName;
+  private String boughtBy;
+  private double price;
 
   // constructor
   public Order() {

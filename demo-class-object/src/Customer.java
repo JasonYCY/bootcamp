@@ -15,7 +15,7 @@ public class Customer {
   }
 
   // method
-  public Order getOrderByID(int targetOrderID) {
+  public Order getOrder(int targetOrderID) {
     for (Order order : orders) {
       if (order.getOrderID() == targetOrderID) {
         return order;
@@ -24,7 +24,7 @@ public class Customer {
     return null;
   }
 
-  public void addOrder(Order newOrder) {
+  public void add(Order newOrder) {
     Order[] newOrders = new Order[orders.length + 1];
     for (int i = 0; i < orders.length; i++) {
       newOrders[i] = this.orders[i];
@@ -71,14 +71,14 @@ public class Customer {
   public static void main(String[] args) {
     // create customer John and his orders
     Customer john = new Customer("John");
-    john.addOrder(new Order("Apple", 3, john.getName()));
-    john.addOrder(new Order("Laptop", 5000, john.getName()));
-    john.addOrder(new Order("Tea", 10, john.getName()));
+    john.add(new Order("Apple", 3, john.getName()));
+    john.add(new Order("Laptop", 5000, john.getName()));
+    john.add(new Order("Tea", 10, john.getName()));
     System.out.println("\n" + john + "\n");
 
     // order lookup by order ID
     int targetOrderID = 1;
-    Order order = john.getOrderByID(targetOrderID);
+    Order order = john.getOrder(targetOrderID);
     if (order != null) {
       System.out.println("Order of index " + targetOrderID + " found! The order is:\n" + order);
     } else {
