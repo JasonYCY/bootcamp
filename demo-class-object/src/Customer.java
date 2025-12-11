@@ -15,6 +15,10 @@ public class Customer {
   }
 
   // method
+  public double getOrderAmount(int targetOrderID) {
+    return getOrder(targetOrderID).amount();
+  }
+
   public Order getOrder(int targetOrderID) {
     for (Order order : orders) {
       if (order.getOrderID() == targetOrderID) {
@@ -71,9 +75,9 @@ public class Customer {
   public static void main(String[] args) {
     // create customer John and his orders
     Customer john = new Customer("John");
-    john.add(new Order("Apple", 3, john.getName()));
-    john.add(new Order("Laptop", 5000, john.getName()));
-    john.add(new Order("Tea", 10, john.getName()));
+    john.add(new Order());
+    john.add(new Order(new Item(5, 3), new Item(1.5, 6), new Item(100.5, 3)));
+    john.add(new Order(new Item(5, 3), new Item(1.5, 6)));
     System.out.println("\n" + john + "\n");
 
     // order lookup by order ID
@@ -84,6 +88,12 @@ public class Customer {
     } else {
       System.out.println("Order not found!");
     }
+    System.out.println();
+
+    // Order.amount()
+    // Customer.getOrderAmount(int orderID)
+    double orderTotalAmount = john.getOrderAmount(targetOrderID);
+    System.out.println("The total amount for order with index " + targetOrderID + " is: " + orderTotalAmount);
 
 
 

@@ -1,42 +1,58 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.math.BigDecimal;
+// import java.time.LocalDateTime;
 
 public class Order {
   // attribute
   private static int nextID = 0;
   private int orderID = nextID++;
-  private LocalDateTime orderDateTime = LocalDateTime.now();
-  private String productName;
-  private String boughtBy;
-  private double price;
+  // private LocalDateTime orderDateTime = LocalDateTime.now();
+  private Item[] items;
 
   // constructor
   public Order() {
-    this.productName= "Test Order";
-    this.boughtBy = "Unknown";
-    this.price = 0;
+    items = new Item[0];
   }
 
-  public Order(String productName, double price, String boughtBy) {
-    this.productName= productName;
-    this.boughtBy = boughtBy;
-    this.price = price;
+  public Order(Item item) {
+    items = new Item[] {item};
+  }
+
+  public Order(Item... items) {
+    this.items = new Item[items.length];
+    for (int i = 0; i < items.length; i++) {
+      this.items[i] = items[i];
+    }
   }
 
   // method
+  public double amount() {
+    BigDecimal totalAmount = BigDecimal.valueOf(0);
+    for (Item item : items) {
+      totalAmount = totalAmount.add(BigDecimal.valueOf(item.totalPrice()));
+    }
+    return totalAmount.doubleValue();
+  }
+
   @Override
   public String toString() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd (HH:mm:ss)");
-    String formattedDateTime = orderDateTime.format(formatter);
+    StringBuilder builder = new StringBuilder();
+    builder.append(String.format("ID: %-3d | ", orderID));
+    
+    if (items == null || items.length == 0) {
+      builder.append("Not found! Order contains 0 item!");
+    } else {
+      for (int i = 0; i < items.length; i++) {
+        if (items[i] != null) {
+          builder.append("Item ").append(i).append(" ");
+          builder.append(items[i].toString());
+          if (i < items.length - 1) {
+            builder.append(", ");
+          }
+        }
+      }
+    }
 
-    return String.format(
-      "ID: %-3d | Order Time: %-22s | Product: %-15s | Price: %-10.2f | Bought By: %-20s",
-      orderID, 
-      formattedDateTime, 
-      productName, 
-      price, 
-      boughtBy
-    );
+    return builder.toString();
   }
 
   public int getOrderID() {
