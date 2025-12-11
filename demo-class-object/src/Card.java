@@ -26,12 +26,12 @@ public class Card {
     // Convert rank character to readable string
     String rankString;
     switch (rank) {
-      case 'A': rankString = "A"; break;
+      case 'A': rankString = " A"; break;
       case 'T': rankString = "10"; break;
-      case 'J': rankString = "J"; break;
-      case 'Q': rankString = "Q"; break;
-      case 'K': rankString = "K"; break;
-      default: rankString = String.valueOf(rank); // 2-9
+      case 'J': rankString = " J"; break;
+      case 'Q': rankString = " Q"; break;
+      case 'K': rankString = " K"; break;
+      default: rankString = " " + String.valueOf(rank); // 2-9
     }
     
     // Convert suit character to full name
@@ -44,7 +44,7 @@ public class Card {
       default: suitString = "Unknown";
     }
     
-    return  "(" + suitString + " " + rankString + ")";
+    return  "" + rankString + suitString + "";
   }
 
 
