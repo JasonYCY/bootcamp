@@ -71,7 +71,7 @@ public class Teacher {
     for (int i = 0; i < 22; i++) {
       System.out.print(((i + 1 < 10) ? " " : "") + (i + 1) + ") ");
       String color = colors[i % colors.length];  // Cycles: RED, YELLOW, BLUE, RED...
-      john.buy(new Candy(color));
+      john.buy(Candy.ofColor(color));
     }
     System.out.println();
     john.showCandies();
