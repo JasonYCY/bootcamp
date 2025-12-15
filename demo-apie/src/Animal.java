@@ -16,4 +16,9 @@ public abstract class Animal {
   public int getAge() {
     return age;
   }
+
+  @Override
+  public String toString() {
+    return "Animal(name=" + name + ",age=" + age + ")";
+  }
 }

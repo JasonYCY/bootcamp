@@ -21,4 +21,9 @@ public class Dog extends Animal {
   public int hashCode() {
     return Objects.hash(super.getName(), super.getAge());
   }
+
+  @Override
+  public String toString() {
+    return "Dog(" + super.toString() + ")";
+  }
 }
