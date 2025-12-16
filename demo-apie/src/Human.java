@@ -1,4 +1,4 @@
-public class Human {
+public class Human implements Eatable, Sleepable {
   private static final int MAX_HP = 100;
   private String name;
   private int HP = MAX_HP;
