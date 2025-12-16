@@ -67,7 +67,7 @@ public class Hero {
   }
 
   public boolean setLevel(int updatedLevel) {
-    if (updatedLevel >= BaseStats.MAX_LEVEL || updatedLevel < 1) {
+    if (updatedLevel > BaseStats.MAX_LEVEL || updatedLevel < 1) {
       return false;
     }
     this.level = updatedLevel;
