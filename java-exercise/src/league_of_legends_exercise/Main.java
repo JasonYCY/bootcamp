@@ -8,10 +8,11 @@ public class Main {
   private static final String RED = "\u001B[31m"; // Invalid input/Error
   private static final String GREEN = "\u001B[32m"; // Used for Player 2 prompts/actions (formerly used for general
                                                     // success)
-  private static final String YELLOW = "\u001B[33m"; // Status updates
   private static final String BLUE = "\u001B[34m"; // Used for Player 1 prompts/actions
   private static final String CYAN = "\u001B[36m"; // Welcome message
+  private static final String PINK = "\u001B[38;5;217m"; // Light Pink
   private static final String GOLD = "\u001B[38;5;214m"; // Game Over message
+  private static final String YELLOW = "\u001B[38;5;214m"; // Status updates
 
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
@@ -69,11 +70,6 @@ public class Main {
 
       // Switch turns
       isPlayer1Turn = !isPlayer1Turn;
-
-      // Display current HPs at end of turn in YELLOW
-      System.out.printf(
-          YELLOW + "\nGame Status: P1 HP: %.1f | P2 HP: %.1f\n" + RESET,
-          hero1.getCurrentHp(), hero2.getCurrentHp());
     }
 
     // 4. Game Over Phase (Cooler Message)
@@ -143,8 +139,8 @@ public class Main {
       try {
         int level = Integer.parseInt(scanner.nextLine());
         if (hero.setLevel(level)) {
-          System.out.println("\n" + YELLOW + playerName + "'s hero set to Level "
-              + level + "." + RESET);
+          System.out.println("\n" + YELLOW + playerName
+              + "'s hero set to Level " + level + "." + RESET);
           return;
         } else {
           System.out.println(RED + "Invalid level. Must be between 1 and "
@@ -172,40 +168,82 @@ public class Main {
   private static boolean handleAction(int choice, Hero attacker, Hero opponent,
       String color) {
     System.out.println();
+    double[] damageDealt = new double[1]; // Array used to pass-by-reference damage value
+    double oldOpponentHp = opponent.getCurrentHp();
+    double oldAttackerHp = attacker.getCurrentHp();
+
     switch (choice) {
       case 1:
-        attacker.physicalAttack(opponent);
-        System.out.println(YELLOW + "Used Physical Attack!" + RESET);
+        boolean isCrit = attacker.physicalAttack(opponent, damageDealt);
+        System.out.println(YELLOW + "Player " + (attacker.getId() + 1)
+            + " used Physical Attack!\n" + RESET);
+        System.out.println(YELLOW + "Player " + (opponent.getId() + 1)
+            + " took " + String.format("%.1f", damageDealt[0]) + " damage"
+            + (isCrit ? " (Critical Damage!)" : ""));
+        System.out.println("HP: " + String.format("%.1f/%.1f -> %.1f/%.1f",
+            oldOpponentHp, opponent.getMaxHp(), opponent.getCurrentHp(),
+            opponent.getMaxHp()) + RESET);
+        showStatus(attacker, opponent);
         return true;
+
       case 2:
-        attacker.magicalAttack(opponent);
-        System.out.println(YELLOW + "Used Magical Attack!" + RESET);
+        attacker.magicalAttack(opponent, damageDealt);
+        System.out.println(YELLOW + "Player " + (attacker.getId() + 1)
+            + " used Magical Attack!\n" + RESET);
+        System.out.println(YELLOW + "Player " + (opponent.getId() + 1)
+            + " took " + String.format("%.1f", damageDealt[0]) + " damage");
+        System.out.println("HP: " + String.format("%.1f/%.1f -> %.1f/%.1f",
+            oldOpponentHp, opponent.getMaxHp(), opponent.getCurrentHp(),
+            opponent.getMaxHp()) + RESET);
+        showStatus(attacker, opponent);
         return true;
+
       case 3:
         attacker.recoverHp();
-        System.out.println(YELLOW + "Recovered 20% HP." + RESET);
+        System.out.println(
+            YELLOW + "Player " + (attacker.getId() + 1) + " recovered 20% HP!");
+        System.out.println("HP: " + String.format("%.1f/%.1f -> %.1f/%.1f",
+            oldAttackerHp, attacker.getMaxHp(), attacker.getCurrentHp(),
+            attacker.getMaxHp()) + RESET);
+        showStatus(attacker, opponent);
         return true;
+
       case 4:
         if (attacker.getLevel() < BaseStats.MAX_LEVEL) {
           attacker.levelUp();
           System.out.println(
               YELLOW + "Leveled up to " + attacker.getLevel() + "!" + RESET);
-          System.out.println(attacker); // Show updated stats
+          showStatus(attacker, opponent);
           return true;
         } else {
           System.out.println(RED + "Already at max level ("
               + BaseStats.MAX_LEVEL + ")! Choose another action." + RESET);
-          return false; // Turn not complete, must choose again
+          return false;
         }
+
       case 5:
         System.out.println(YELLOW + "Did nothing." + RESET);
+        showStatus(attacker, opponent);
         return true;
+
       default:
-        // This case is actually unreachable now because of the try/catch in main,
-        // but good practice to keep.
         System.out
             .println(RED + "Invalid action choice. Please choose 1-5." + RESET);
         return false;
     }
+  }
+
+  // Helper to show both players status in yellow
+  private static void showStatus(Hero a, Hero b) {
+    Hero p1 = (a.getId() == 0) ? a : b;
+    Hero p2 = (a.getId() == 1) ? a : b;
+    System.out.println(PINK + "\nPlayer 1 - " + p1.getRole() + " (Lv. "
+        + p1.getLevel() + ")");
+    System.out.printf("HP: %.1f/%.1f | MP: %.1f/%.1f\n", p1.getCurrentHp(),
+        p1.getMaxHp(), p1.getCurrentMp(), p1.getMaxMp());
+    System.out.println(
+        "\nPlayer 2 - " + p2.getRole() + " (Lv. " + p2.getLevel() + ")");
+    System.out.printf("HP: %.1f/%.1f | MP: %.1f/%.1f\n" + RESET,
+        p2.getCurrentHp(), p2.getMaxHp(), p2.getCurrentMp(), p2.getMaxMp());
   }
 }

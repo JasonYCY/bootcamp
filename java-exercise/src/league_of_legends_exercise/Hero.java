@@ -78,69 +78,33 @@ public class Hero {
     return true;
   }
 
-  public void receivePhysicalDamage(double damage) {
-    // Calculate effective damage after physical defense reduction
-    double effectiveDamage = damage - this.physicalDefense;
-    
-    // Minimum damage is 1 to ensure attacks always have some effect
-    if (effectiveDamage < 1) {
-      effectiveDamage = 1;
-    }
-    
-    // Apply damage to current HP
-    this.currentHp -= effectiveDamage;
-    
-    // Ensure HP doesn't go below 0
-    if (this.currentHp < 0) {
-      this.currentHp = 0;
-    }
+  public double receivePhysicalDamage(double damage) {
+    double effectiveDamage = Math.max(1, damage - this.physicalDefense);
+    double previousHp = this.currentHp;
+    this.currentHp = Math.max(0, this.currentHp - effectiveDamage);
+    return previousHp - this.currentHp; // Returns actual damage dealt
   }
 
-  public void receiveMagicalDamage(double damage) {
-    // Calculate effective damage after magical defense reduction
-    double effectiveDamage = damage - this.magicalDefense;
-    
-    // Minimum damage is 1 to ensure attacks always have some effect
-    if (effectiveDamage < 1) {
-      effectiveDamage = 1;
-    }
-    
-    // Apply damage to current HP
-    this.currentHp -= effectiveDamage;
-    
-    // Ensure HP doesn't go below 0
-    if (this.currentHp < 0) {
-      this.currentHp = 0;
-    }
+  public double receiveMagicalDamage(double damage) {
+    double effectiveDamage = Math.max(1, damage - this.magicalDefense);
+    double previousHp = this.currentHp;
+    this.currentHp = Math.max(0, this.currentHp - effectiveDamage);
+    return previousHp - this.currentHp; // Returns actual damage dealt
   }
 
-  public void physicalAttack(Hero opponent) {
-    // Calculate base damage
+  // Modified to return a boolean: true if critical hit
+  public boolean physicalAttack(Hero opponent, double[] damageDealt) {
     double baseDamage = this.physicalAttack;
+    boolean isCritical = Math.random() < this.criticalChance;
+    double totalDamage = isCritical ? this.criticalDamage : baseDamage;
     
-    // Check for critical hit
-    double criticalMultiplier = 1.0;
-    if (Math.random() < this.criticalChance) {
-      criticalMultiplier = this.criticalDamage / this.physicalAttack;
-    }
-    
-    // Calculate total damage with critical chance
-    double totalDamage = baseDamage * criticalMultiplier;
-    
-    // Apply damage to opponent
-    opponent.receivePhysicalDamage(totalDamage);
+    // damageDealt[0] will store the result from receiveDamage
+    damageDealt[0] = opponent.receivePhysicalDamage(totalDamage);
+    return isCritical;
   }
 
-  public void magicalAttack(Hero opponent) {
-    // Calculate base damage
-    double baseDamage = this.magicalAttack;
-    
-    // Magical attacks don't have critical hits in this implementation
-    // To add critical hits to magical attacks, there is a need to add
-    // magical critical stats to the class
-    
-    // Apply damage to opponent
-    opponent.receiveMagicalDamage(baseDamage);
+  public void magicalAttack(Hero opponent, double[] damageDealt) {
+    damageDealt[0] = opponent.receiveMagicalDamage(this.magicalAttack);
   }
 
   public void recoverHp() {
