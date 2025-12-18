@@ -1,8 +1,8 @@
 public enum Suit {
-  DIAMONDS('D', (char)4, "Diamonds"),
-  CLUBS('C', (char)5, "Clubs"),
-  HEARTS('H', (char)3, "Hearts"),
-  SPADES('S', (char)6, "Spades");
+  DIAMONDS('D', '♦', "Diamonds"),
+  CLUBS('C', '♣', "Clubs"),
+  HEARTS('H', '♥', "Hearts"),
+  SPADES('S', '♠', "Spades");
 
   private final char symbolChar;
   private final char displaySymbol;

@@ -10,7 +10,7 @@ public class HandManager {
   // method
   public boolean isFlush() {
     if (cards.length != 5) return false;
-    char firstSuit = cards[0].getSuit();
+    Suit firstSuit = cards[0].getSuit();
 
     for (int i = 1; i < cards.length; i++) {
       if (cards[i].getSuit() != firstSuit) {
@@ -22,23 +22,8 @@ public class HandManager {
   }
 
   // Helper method to convert rank char to array index
-  private int rankToIndex(char rank) {
-    switch (rank) {
-      case 'A': return 0;
-      case '2': return 1;
-      case '3': return 2;
-      case '4': return 3;
-      case '5': return 4;
-      case '6': return 5;
-      case '7': return 6;
-      case '8': return 7;
-      case '9': return 8;
-      case 'T': return 9;
-      case 'J': return 10;
-      case 'Q': return 11;
-      case 'K': return 12;
-      default: return -1; // Should not happen
-    }
+  private int rankToIndex(Rank rank) {
+    return rank.getValue();
   }
 
   public boolean isFullHouse() {
@@ -49,7 +34,7 @@ public class HandManager {
     
     // Fill the rankCounts array
     for (Card card : cards) {
-      char rank = card.getRank();  // ← Only checking RANK, not suit!
+      Rank rank = card.getRank();  // ← Only checking RANK, not suit!
       int index = rankToIndex(rank);
       rankCounts[index]++;
     }
@@ -69,6 +54,45 @@ public class HandManager {
   // main method
   public static void main(String[] args) {
     // test
+    Card[] flushHand = {
+      new Card(Suit.HEARTS, Rank.TWO),
+      new Card(Suit.HEARTS, Rank.FIVE),
+      new Card(Suit.HEARTS, Rank.NINE),
+      new Card(Suit.HEARTS, Rank.JACK),
+      new Card(Suit.HEARTS, Rank.KING)
+    };
+    HandManager flushManager = new HandManager(flushHand);
+    System.out.println("Is Flush: " + flushManager.isFlush()); // Expected: true
+
+    Card[] nonFlushHand = {
+      new Card(Suit.HEARTS, Rank.TWO),
+      new Card(Suit.DIAMONDS, Rank.FIVE),
+      new Card(Suit.HEARTS, Rank.NINE),
+      new Card(Suit.HEARTS, Rank.JACK),
+      new Card(Suit.HEARTS, Rank.KING)
+    };
+    HandManager nonFlushManager = new HandManager(nonFlushHand);
+    System.out.println("Is Flush: " + nonFlushManager.isFlush()); // Expected: false
+
+    Card[] fullHouseHand = {
+      new Card(Suit.CLUBS, Rank.THREE),
+      new Card(Suit.DIAMONDS, Rank.THREE),
+      new Card(Suit.HEARTS, Rank.THREE),
+      new Card(Suit.SPADES, Rank.SIX),
+      new Card(Suit.HEARTS, Rank.SIX)
+    };
+    HandManager fullHouseManager = new HandManager(fullHouseHand);
+    System.out.println("Is Full House: " + fullHouseManager.isFullHouse()); // Expected: true
+
+    Card[] nonFullHouseHand = {
+      new Card(Suit.CLUBS, Rank.THREE),
+      new Card(Suit.DIAMONDS, Rank.THREE),
+      new Card(Suit.HEARTS, Rank.FOUR),
+      new Card(Suit.SPADES, Rank.SIX),
+      new Card(Suit.HEARTS, Rank.SIX)
+    };
+    HandManager nonFullHouseManager = new HandManager(nonFullHouseHand);
+    System.out.println("Is Full House: " + nonFullHouseManager.isFullHouse()); // Expected: false
 
 
 
