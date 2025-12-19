@@ -51,14 +51,18 @@ public class Dog {
   public void removeTargetDog(Dog target) {
     // assume the object calling this method is the HEAD
     if (nextDog == null) return;
-    if (nextDog == target) nextDog = nextDog.next();
+    if (nextDog == target) {
+      nextDog = nextDog.next();
+      return;
+    }
 
-    Dog prev = null;
-    Dog current = nextDog;
+    Dog prev = nextDog;
+    Dog current = prev.next();
+
     while (current != null) {
       if (current.equals(target)) {
         prev.setNextDog(current.next());
-        break;
+        return;
       }
       prev = current;
       current = current.next();
