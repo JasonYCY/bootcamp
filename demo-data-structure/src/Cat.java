@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Cat {
@@ -34,16 +35,26 @@ public class Cat {
   public static void main(String[] args) {
     // test
     ArrayList<Cat> arr = new ArrayList<>();
-    Cat catToRemove;
+    Cat catToRemove = Cat.ofName("Mary");
+    System.out.println("Cat to remove: " + catToRemove + "\n");
     arr.add(Cat.ofName("John"));
     arr.add(Cat.ofName("Steve"));
-    arr.add(catToRemove = Cat.ofName("Mary"));
+    arr.add(Cat.ofName("Mary"));
     arr.add(Cat.ofName("Peter"));
     arr.add(Cat.ofName("Tom"));
-    System.out.println(arr);
+    arr.addFirst(null);
+    arr.add(null);
+    arr.add(null);
+    System.out.println(arr + "\n");
 
-    arr.remove(catToRemove);
+    arr.remove(null);
     System.out.println(arr);
+    arr.contains(catToRemove);
+    arr.isEmpty();
+
+    // polymorphism
+    List<Cat> catList = new ArrayList<>();
+    System.out.println(catList);
 
 
 
