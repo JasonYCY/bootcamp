@@ -22,6 +22,14 @@ public abstract class Shape {
     return total;
   }
 
+  public static double totalArea3(List<? extends Shape> shapes) {
+    double total = 0;
+    for (Shape shape : shapes) {
+      total += shape.area();
+    }
+    return total;
+  }
+
 
   // main method
   public static void main(String[] args) {
@@ -39,8 +47,12 @@ public abstract class Shape {
     // totalArea(squares);
     totalArea(shapes);
 
-    totalArea2(circles);
-    totalArea2(squares);
-    totalArea2(shapes);
+    System.out.println(totalArea2(circles));
+    System.out.println(totalArea2(squares));
+    System.out.println(totalArea2(shapes));
+
+    System.out.println(totalArea3(circles));
+    System.out.println(totalArea3(squares));
+    System.out.println(totalArea3(shapes));
   }
 }
