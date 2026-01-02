@@ -1,12 +1,23 @@
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class DemoThread {
-  private int x;
+  // private int x;
+  private AtomicInteger x = new AtomicInteger(0);
+
+  // public int getX() {
+  //   return x;
+  // }
 
   public int getX() {
-    return x;
+    return x.get();
   }
 
-  public synchronized void addOne() {
-    x++;
+  // public synchronized void addOne() {
+  //   x++;
+  // }
+
+  public void addOne() {
+    x.getAndIncrement();
   }
 
 
