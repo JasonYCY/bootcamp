@@ -48,7 +48,6 @@ public class DemoStream {
 
     // Ball
     // RED 10, BLUE 3, RED 12, YELLOW 8, BLUE 4
-    // Find all blue and yellow balls
     List<Ball> balls = new ArrayList<>(
       List.of(
         new Ball(Ball.Color.RED, 10),
@@ -59,10 +58,18 @@ public class DemoStream {
       )
     );
     
+    // Find all blue and yellow balls
     List<Ball> targetBalls = balls.stream()
       .filter(ball -> ball.getColor() == Ball.Color.BLUE || ball.getColor() == Ball.Color.YELLOW)
       .collect(Collectors.toList());
     System.out.println(targetBalls);
+
+    // Find all blue and yellow balls, then return the numbers of the balls
+    List<Integer> targetIntegers = balls.stream()
+      .filter(ball -> ball.getColor() == Ball.Color.BLUE || ball.getColor() == Ball.Color.YELLOW)
+      .map(Ball::getNum)
+      .collect(Collectors.toList());
+    System.out.println(targetIntegers);
 
 
 
