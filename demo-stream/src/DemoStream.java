@@ -71,6 +71,22 @@ public class DemoStream {
       .collect(Collectors.toList());
     System.out.println(targetIntegers);
 
+    // Find all blue and yellow balls, then return the numbers of the balls in ascending order
+    List<Integer> sortedTargetIntegers = balls.stream()
+      .filter(ball -> ball.getColor() == Ball.Color.BLUE || ball.getColor() == Ball.Color.YELLOW)
+      .map(Ball::getNum)
+      .sorted()
+      .collect(Collectors.toList());
+    System.out.println(sortedTargetIntegers);
+
+    // Find all blue and yellow balls, then return the numbers of the balls in descending order
+    List<Integer> descendingSortedTargetIntegers = balls.stream()
+      .filter(ball -> ball.getColor() == Ball.Color.BLUE || ball.getColor() == Ball.Color.YELLOW)
+      .map(Ball::getNum)
+      .sorted((n1, n2) -> n2 - n1)
+      .collect(Collectors.toList());
+    System.out.println(descendingSortedTargetIntegers);
+
 
 
 
