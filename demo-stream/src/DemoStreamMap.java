@@ -71,6 +71,7 @@ public class DemoStreamMap {
       ));
     System.out.println(salaryGroup);
 
+    // Version 1
     // System.out.println("Salary >= 30000:");
     // salaryGroup.get(true).forEach(employee -> System.out.println("\t" + employee));
     // System.out.println();
@@ -79,10 +80,18 @@ public class DemoStreamMap {
     // salaryGroup.get(false).forEach(employee -> System.out.println("\t" + employee));
     // System.out.println();
     
-    salaryGroup.entrySet().forEach(entry -> {
-      System.out.println("\nKey:\t" + entry.getKey());
+    // Version 2
+    // salaryGroup.entrySet().forEach(entry -> {
+    //   System.out.println("\nKey:\t" + entry.getKey());
+    //   System.out.print("Value: ");
+    //   entry.getValue().forEach(employee -> System.out.println("\t" + employee));
+    // });
+
+    // Version 3
+    salaryGroup.forEach((key, value) -> {
+      System.out.println("\nKey:\t" + key);
       System.out.print("Value: ");
-      entry.getValue().forEach(employee -> System.out.println("\t" + employee));
+      value.forEach(employee -> System.out.println("\t" + employee));
     });
 
 
