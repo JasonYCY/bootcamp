@@ -326,7 +326,8 @@ public class StreamExercise {
         Person::getAge,
         Collectors.mapping(
           Person::getName,
-          Collectors.toList())
+          Collectors.toList()
+        )
       ));
     System.out.println(groupByAgeMap);
 
