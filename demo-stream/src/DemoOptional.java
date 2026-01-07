@@ -50,6 +50,22 @@ public class DemoOptional {
     
     // ifPresent() Lambda
     integerBox1.ifPresent(e -> System.out.println("Print with lambda: " + e));
+
+    // orElse()
+    int result = integerBox1.orElse(-1);
+    System.out.println("orElse: " + result);
+    
+    // orElseGet() <- takes in Supplier
+    result = integerBox1.orElseGet(() -> -1);
+    System.out.println("orElseGet: " + result);
+
+    // orElseThrow() <- no input (default exception)
+    result = integerBox1.orElseThrow();
+    System.out.println("orElseThrow: " + result);
+
+    // orElseThrow() <- takes in Supplier (throw custom exception)
+    result = integerBox1.orElseThrow(() -> new RuntimeException("NOT FOUND!!!"));
+    System.out.println("orElseThrow: " + result);
     
     // Incorrect way to use Optional
     Optional<Integer> index2 = incorrectMethod(Optional.ofNullable(new int[]{10, 9, 4, 3, 5}), 9);
