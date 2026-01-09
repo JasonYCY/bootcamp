@@ -1,6 +1,8 @@
 package com.javahongkong.bootcamp.exercise;
 
-public abstract class Account {
+import java.math.BigDecimal;
+
+public abstract class Account implements AccountInterface {
 	private AccountHolder accountHolder;
 	private Long accountNumber;
 	private int pin;
@@ -8,40 +10,43 @@ public abstract class Account {
 
 	protected Account(AccountHolder accountHolder, Long accountNumber, int pin, double startingDeposit) {
 		// complete the constructor
+		this.accountHolder = accountHolder;
+		this.accountNumber = accountNumber;
+		this.pin = pin;
+		this.balance = startingDeposit;
 	}
 
 	public AccountHolder getAccountHolder() {
-		// complete the function
-		return null;
+		return accountHolder;
 	}
 
 	public boolean validatePin(int attemptedPin) {
 		// complete the function
-		return true;
+		return attemptedPin == pin;
 	}
 
 	public double getBalance() {
-		// complete the function
-		return -1.0;
+		return balance;
 	}
 
-	public double getPin() {
-		// complete the function
-		return -1.0;
+	public int getPin() {
+		return pin;
 	}
 
 	public Long getAccountNumber() {
-		// complete the function
-		return this.accountNumber;
+		return accountNumber;
 	}
 
 	public void creditAccount(double amount) {
 		// complete the function
 		// BigDecimal
+		balance = BigDecimal.valueOf(balance).add(BigDecimal.valueOf(amount)).doubleValue();
 	}
 
 	public boolean debitAccount(double amount) {
 		// complete the function
+		if (balance < amount) return false;
+		balance = BigDecimal.valueOf(balance).subtract(BigDecimal.valueOf(amount)).doubleValue();
 		return true;
 	}
 }

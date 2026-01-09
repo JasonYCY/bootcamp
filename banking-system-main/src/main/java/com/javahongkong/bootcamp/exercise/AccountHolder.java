@@ -8,14 +8,14 @@ public abstract class AccountHolder {
 	 */
 	public AccountHolder(int idNumber) {
 		// complete the function
+		this.idNumber = idNumber;
 	}
 
 	/**
 	 * @return private int {@link AccountHolder#idNumber}
 	 */
 	public int getIdNumber() {
-		// complete the function
-		return -1;
+		return idNumber;
 	}
 
 	// public abstract int getSomething();
